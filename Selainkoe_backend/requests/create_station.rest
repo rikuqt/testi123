@@ -1,0 +1,8 @@
+POST http://localhost:3001/api/gasstations
+Content-Type: application/json
+
+{   
+        "addr": "jeejeetesti",
+        "corp": "123",
+        "price" : 5
+}
