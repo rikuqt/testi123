@@ -46,16 +46,45 @@ app.get('/api/gasstations', (request, response) => {
   
     app.post('/api/gasstations', (request, response) => {
       const maxId = GAS_STATIONS.length > 0
-        ? Math.max(...GAS_STATIONS.map(n => Number(n.id))) 
-        : 0
+        ? Math.max(...GAS_STATIONS.map(n => Number(n.id)))         // <--- jos tämä ei toimi
+        : 0                                                        // korvaa se alla kommentissa olevalla koodilla
     
-      const station = request.body
+      const station = request.body                                
       station.id = String(maxId + 1)
     
       GAS_STATIONS = GAS_STATIONS.concat(station)
     
       response.json(station)
     })
+
+/*
+app.post('/api/gasstations', (request, response) => {
+    const body = request.body
+    console.log(body)
+    if (!body.addr || !body.corp || !body.price) {
+      return response.status(400).json({
+        error: 'missing inputs'
+      })
+    }
+ 
+    const newStation = {
+      id: generateId(),
+      addr: body.addr,
+      corp: body.corp,
+      price: body.price,
+    }
+ 
+    GAS_STATIONS = GAS_STATIONS.concat(newStation)
+    response.json(newStation)
+  })
+ 
+  const generateId = () => {
+    const maxId = GAS_STATIONS.length > 0
+      ? Math.max(...GAS_STATIONS.map(n => Number(n.id)))
+      : 0
+    return String(maxId + 1)
+  }
+*/
   
   app.get('/api/gasstations/:id', (request, response) => {
     const id = Number(request.params.id)
