@@ -46,7 +46,7 @@ app.get('/api/gasstations', (request, response) => {
   
     app.post('/api/gasstations', (request, response) => {
       const maxId = GAS_STATIONS.length > 0
-        ? Math.max(...GAS_STATIONS.map(n => Number(n.id)))         // <--- jos tämä ei toimi
+        ? Math.max(...GAS_STATIONS.map(n => Number(n.id)))         // <--- jos tämä ei toimi (POST)
         : 0                                                        // korvaa se alla kommentissa olevalla koodilla
     
       const station = request.body                                
